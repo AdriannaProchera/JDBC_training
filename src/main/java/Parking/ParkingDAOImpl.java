@@ -1,9 +1,8 @@
 package Parking;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
+import Ex2.Movie;
+
+import java.sql.*;
 
 //sql injection
 
@@ -51,7 +50,7 @@ public class ParkingDAOImpl implements ParkingDAO{
                 throwables.printStackTrace();
             }
         }else{
-            System.out.println( ERROR_PARKING_SPACE_RESERVATION + "Liczba wolnych miejsc: " + parking.getSpacesCounter());
+            System.out.println( ERROR_PARKING_SPACE_RESERVATION + " Liczba wolnych miejsc: " + parking.getSpacesCounter());
         }
 
     }
@@ -68,7 +67,7 @@ public class ParkingDAOImpl implements ParkingDAO{
                 throwables.printStackTrace();
             }
         }else{
-            System.out.println( ERROR_BLOCKING_PARKING_SPACES + "Liczba wolnych miejsc: " + parking.getSpacesCounter());
+            System.out.println( ERROR_BLOCKING_PARKING_SPACES + " Liczba wolnych miejsc: " + parking.getSpacesCounter());
         }
     }
 
@@ -124,7 +123,7 @@ public class ParkingDAOImpl implements ParkingDAO{
                 throwables.printStackTrace();
             }
         }else{
-            System.out.println(ERROR_NUMBER_OF_PARKING_SPACES_FOR_DISABLED + "Liczba wolnych miejsc: " + parking.getSpacesCounter());
+            System.out.println(ERROR_NUMBER_OF_PARKING_SPACES_FOR_DISABLED + " Liczba wolnych miejsc: " + parking.getSpacesCounter());
         }
     }
 
@@ -147,5 +146,21 @@ public class ParkingDAOImpl implements ParkingDAO{
     @Override
     public int numberOfFreePlaces() {
         return parking.getSpacesCounter();
+    }
+
+    @Override
+    public void showParkingList() {
+        try(Statement stmt = conn.createStatement()){
+            String query = "SELECT*FROM Reservation;";
+            ResultSet result = stmt.executeQuery(query);
+            while(result.next()){
+                System.out.println(result.getInt(1)+ " "+ result.getString(2)+" "+
+                        result.getString(3)+" "+ result.getString(4) +" "
+                        + result.getString(5)+" " + result.getString(6));
+
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }

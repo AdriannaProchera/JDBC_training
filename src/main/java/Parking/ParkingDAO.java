@@ -9,4 +9,5 @@ public interface ParkingDAO {
     void numberOfParkingSpacesForDisabled(int n);
     void createTableReservation();
     int numberOfFreePlaces();
+    void showParkingList();
 }

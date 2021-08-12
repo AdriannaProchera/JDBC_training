@@ -20,6 +20,7 @@ public class MainParking {
             parking.numberOfParkingSpacesForDisabled(5);
             parking.parkingSpaceReservationForPerson(new Person("Adrianna", "Prochera", "KR 12345"));
             parking.parkingSpaceReservationForDisabledPerson(new Person("Jan", "Kowalski", "KR 98765"));
+            parking.showParkingList();
             System.out.println("Liczba wolnych miejsc parkingowych: " + parking.numberOfFreePlaces());
 
         }
